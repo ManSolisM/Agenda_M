@@ -2,6 +2,31 @@
     include "conexion.php";
 
     class Crud extends conexion{
+        public function eliminar_foto_contacto($id_contacto) {
+            $conn = parent::conectar();
+            $sql = "DELETE FROM t_fotos WHERE id_contacto = '$id_contacto'";
+            return mysqli_query($conn, $sql);
+        }
+        // Genera un nombre único y corto para la foto, manteniendo la extensión
+        public function generar_nombre_foto($original) {
+            $ext = pathinfo($original, PATHINFO_EXTENSION);
+            $nombre = uniqid('foto_', true) . '.' . $ext;
+            return $nombre;
+        }
+        public function update_foto_contacto($id_contacto, $nombre, $ruta) {
+            $conn = parent::conectar();
+            $sql = "UPDATE t_fotos SET nombre = '$nombre', ruta = '$ruta' WHERE id_contacto = '$id_contacto'";
+            return mysqli_query($conn, $sql);
+        }
+        public function get_foto_contacto($id_contacto) {
+            $conn = parent::conectar();
+            $sql = "SELECT nombre, ruta FROM t_fotos WHERE id_contacto = '$id_contacto'";
+            $res = mysqli_query($conn, $sql);
+            if ($row = mysqli_fetch_assoc($res)) {
+                return $row;
+            }
+            return null;
+        }
         public function store($datos){
             $conn = parent::conectar();
             $sql = "INSERT INTO t_contactos(paterno,

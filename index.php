@@ -10,7 +10,7 @@
             --primary-navy: #3730a3;
             --accent-gold: #f39c12;
             --background-light: #f8f9fa;
-            --text-dark: #3f4142ff;
+            --text-dark: #3f4142;
             --text-light: #6c757d;
             --text-muted: #868e96;
             --border-light: #e9ecef;
@@ -25,53 +25,86 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--background-light);
+            background-color: #f0f2f5;
             color: var(--text-dark);
             line-height: 1.6;
+            padding: 2rem;
+        }
+
+        .app-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+            border: 1px solid var(--border-light);
         }
 
         .header-section {
-            background: linear-gradient(135deg, var(--primary-navy) 0%, #06bcd4ff 100%);
+            background: linear-gradient(135deg, var(--primary-navy) 0%, #06bcd4 100%);
             color: white;
-            padding: 2rem 0;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transform: rotate(45deg);
         }
 
         .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1rem;
+            position: relative;
+            z-index: 2;
         }
 
         .header-title {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 1.5rem;
         }
 
         .icon {
-            width: 60px;
-            height: 60px;
+            width: 70px;
+            height: 70px;
             background: var(--accent-gold);
-            border-radius: 12px;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
-        .main-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
+        .header-text h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .header-text p {
+            opacity: 0.9;
+            font-size: 1rem;
+        }
+
+        .main-content {
+            padding: 2rem;
         }
 
         .controls-section {
-            background: white;
+            background: var(--background-light);
             padding: 1.5rem;
             border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
             margin-bottom: 2rem;
+            border: 1px solid var(--border-light);
         }
 
         .controls-row {
@@ -113,8 +146,31 @@
         .search-input:focus {
             outline: none;
             border-color: var(--primary-navy);
-            box-shadow: 0 0 0 3px rgba(44, 62, 80, 0.1);
+            box-shadow: 0 0 0 3px rgba(55, 48, 163, 0.1);
         }
+
+        .photo-preview {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .photo-thumb {
+            width: 100px;           /* Ajusta este valor según necesites */
+            height: 100px;          /* Mantén igual que width para círculo perfecto */
+            border-radius: 50%;    /* Hace la imagen circular */
+            object-fit: cover;     /* Mantiene proporciones sin distorsión */
+            border: 2px solid #e9ecef;  /* Borde sutil */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);  /* Sombra suave opcional */
+            transition: all 0.3s ease;  /* Animación suave */
+        }
+
+        .photo-thumb:hover {
+            transform: scale(1.1);  /* Efecto hover opcional */
+            border-color: #3730a3; /* Cambia color del borde al hacer hover */
+        }
+
+
 
         .btn {
             padding: 12px 20px;
@@ -136,15 +192,17 @@
         }
 
         .btn-primary:hover {
-            background: #34495e;
+            background: #2d1b69;
             transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(55, 48, 163, 0.3);
         }
 
         .contacts-container {
             background: white;
             border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            border: 1px solid var(--border-light);
             overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
 
         .table-header {
@@ -169,6 +227,15 @@
             font-size: 0.875rem;
             color: var(--text-muted);
             font-weight: 500;
+            background: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            border: 1px solid var(--border-light);
+        }
+
+        .table-container {
+            max-height: 600px;
+            overflow-y: auto;
         }
 
         .contacts-table {
@@ -184,6 +251,9 @@
             color: var(--text-dark);
             font-size: 0.875rem;
             border-bottom: 2px solid var(--border-light);
+            position: sticky;
+            top: 0;
+            z-index: 10;
         }
 
         .contacts-table td {
@@ -193,56 +263,32 @@
         }
 
         .contacts-table tbody tr:hover {
-            background: rgba(44, 62, 80, 0.05);
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 4rem 2rem;
-            color: var(--text-muted);
-            display: none;
-        }
-
-        .empty-state i {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            opacity: 0.5;
-        }
-
-        .empty-state h3 {
-            margin-bottom: 0.5rem;
-            color: var(--text-dark);
-        }
-
-        .fade-in {
-            opacity: 1;
-        }
-
-        @keyframes fadeIn {
-            from { 
-                opacity: 0; 
-                transform: translateY(20px); 
-            }
-            to { 
-                opacity: 1; 
-                transform: translateY(0); 
-            }
+            background: rgba(55, 48, 163, 0.05);
+            transform: scale(1.01);
+            transition: var(--transition);
         }
 
         .contact-photo {
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid var(--border-light);
+            border: 3px solid var(--border-light);
+            background: var(--background-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            font-weight: 600;
         }
 
         .phone-copy {
             font-family: 'Courier New', monospace;
             background: var(--background-light);
-            padding: 0.25rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.75rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
             border: 1px solid var(--border-light);
             cursor: pointer;
             user-select: none;
@@ -252,6 +298,7 @@
         .phone-copy:hover {
             background: var(--primary-navy);
             color: white;
+            transform: translateY(-1px);
         }
 
         .email-link {
@@ -278,19 +325,19 @@
 
         .action-buttons {
             display: flex;
-            gap: 0.25rem;
+            gap: 0.5rem;
         }
 
         .action-btn {
-            width: 32px;
-            height: 32px;
+            width: 35px;
+            height: 35px;
             border: none;
-            border-radius: 4px;
+            border-radius: 6px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.75rem;
+            font-size: 0.85rem;
             background: var(--background-light);
             color: var(--text-muted);
             transition: var(--transition);
@@ -300,14 +347,45 @@
         .action-btn.edit:hover {
             background: var(--accent-gold);
             color: white;
+            transform: translateY(-2px);
         }
 
         .action-btn.delete:hover {
             background: #ef4444;
             color: white;
+            transform: translateY(-2px);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-muted);
+            display: none;
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.5;
+        }
+
+        .empty-state h3 {
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            font-size: 1.5rem;
+        }
+
+        .empty-state p {
+            max-width: 400px;
+            margin: 0 auto;
+            line-height: 1.6;
         }
 
         @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            
             .controls-row {
                 flex-direction: column;
                 align-items: stretch;
@@ -317,15 +395,50 @@
                 min-width: auto;
             }
 
+            .table-container {
+                max-height: 400px;
+            }
+
             .contacts-table {
                 font-size: 0.8rem;
             }
 
             .contacts-table th,
             .contacts-table td {
-                padding: 0.5rem;
+                padding: 0.75rem 0.5rem;
+            }
+
+            .header-title {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
             }
         }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+        /* Estilos para las fotos de contactos - Reemplaza o agrega estos estilos en tu CSS */
+        /* Responsive - tamaño más pequeño en móviles */
+        @media (max-width: 768px) {
+        .photo-thumb {
+            width: 32px;
+            height: 32px;
+            border-width: 1px;
+        }
+        }
+
     </style>
 
     

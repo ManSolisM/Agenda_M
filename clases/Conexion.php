@@ -4,7 +4,7 @@
             $host = "localhost";
             $usuario = "root";
             $password = "";
-            $base = "agenda2";
+            $base = "agenda";
             $conexion = mysqli_connect(
                 $host, $usuario, $password, $base
             );

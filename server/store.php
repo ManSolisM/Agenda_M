@@ -18,6 +18,14 @@
         "descripcion" => $_POST["descripcion"]
 
     ];
+    $nombre_foto = $crud->generar_nombre_foto($_FILES["foto"]["name"]);
+    // Con esto obtenemos el nombre de un archivo por medio de rquest
+    $datos_file = [ // [foto] -> nombre del archivo,, nombre de control ... [name] -> nombre de la propiedad/control, llave de type
+        "nombre" => $nombre_foto, // el nombre que ira como referencia a la tabla, este es el de los input, los name
+        // tmp es donde se alojara la imagen
+        "origen" => $_FILES["foto"]["tmp_name"], // saber de donde viene, por eso le pusimos origen
+        "destino" => "../public/upload/" . $nombre_foto, 
+    ];
 
     $datos_file = [ // [foto] -> nombre del archivo,, nombre de control ... [name] -> nombre de la propiedad/control, llave de type
         "nombre" => $_FILES["foto"]["name"], // el nombre que ira como referencia a la tabla, este es el de los input, los name
