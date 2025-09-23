@@ -1,5 +1,5 @@
 <?php
-    include "conexion.php";
+    include "Conexion.php";
 
     class Crud extends conexion{
         public function eliminar_foto_contacto($id_contacto) {
